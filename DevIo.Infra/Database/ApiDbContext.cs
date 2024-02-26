@@ -1,6 +1,5 @@
 ﻿using DevIo.Business.Model;
 using Microsoft.EntityFrameworkCore;
-using System.Reflection;
 
 namespace DevIo.Infra.Database
 {
@@ -12,10 +11,7 @@ namespace DevIo.Infra.Database
         {
         }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            base.OnModelCreating(modelBuilder);
-            modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
-        }
+
+
     }
 }

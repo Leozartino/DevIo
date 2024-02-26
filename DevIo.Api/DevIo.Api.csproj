@@ -11,12 +11,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DevIo.Business\DevIo.Business.csproj" />
-    <ProjectReference Include="..\DevIo.Infra\DevIo.Infra.csproj" />
+    <Folder Include="Controllers\" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
+    <ProjectReference Include="..\DevIo.Business\DevIo.Business.csproj" />
+    <ProjectReference Include="..\DevIo.Infra\DevIo.Infra.csproj" />
   </ItemGroup>
 
 </Project>
