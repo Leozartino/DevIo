@@ -4,7 +4,6 @@
     {
         public string Name { get; set; }
         public string Document { get; set; }
-        public int SupplierType { get; set; }
         public bool IsActive { get; set; }
         public Adress Adress { get; set; }
         public SupplierType SupplierType { get; set; }
