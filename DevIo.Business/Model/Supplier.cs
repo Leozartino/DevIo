@@ -1,11 +1,15 @@
 ﻿namespace DevIo.Business.Model
 {
-    public class Supplier
+    public class Supplier : BaseEntity
     {
-        public Guid Id { get; set; }
         public string Name { get; set; }
         public string Document { get; set; }
         public int SupplierType { get; set; }
         public bool IsActive { get; set; }
+        public Adress Adress { get; set; }
+        public SupplierType SupplierType { get; set; }
+
+        public IEnumerable<Product> Products { get; set;}
+
     }
 }
