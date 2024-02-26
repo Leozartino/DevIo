@@ -1,6 +1,6 @@
-﻿namespace DevIo.Business.Model
+﻿namespace DevIo.Api.Dtos
 {
-    public class Adress : BaseEntity
+    public class AddressDto
     {
         public Guid SupplierId { get; set; }
         public string Logradouro { get; set; }

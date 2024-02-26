@@ -9,6 +9,5 @@
         public SupplierType SupplierType { get; set; }
 
         public IEnumerable<Product> Products { get; set;}
-
     }
 }

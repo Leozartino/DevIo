@@ -1,9 +1,8 @@
 ﻿namespace DevIo.Business.Model
 {
-    public class Product
+    public class Product : BaseEntity
     {
         public Guid SupplierId { get; set; }
-
         public string Name { get; set; }
         public string Description { get; set; }
         public string Image { get; set; }
