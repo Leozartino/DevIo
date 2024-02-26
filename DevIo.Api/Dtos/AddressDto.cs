@@ -1,9 +1,13 @@
-﻿namespace DevIo.Api.Dtos
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace DevIo.Api.Dtos
 {
     public class AddressDto
     {
+        [Key]
+        public Guid Id { get; set; } 
         public Guid SupplierId { get; set; }
-        public string Logradouro { get; set; }
+        public string Street { get; set; }
         public string Number { get; set; }
         public string Complement { get; set; }
         public string PostalCode { get; set; }

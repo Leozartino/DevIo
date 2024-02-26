@@ -1,7 +1,11 @@
-﻿namespace DevIo.Api.Dtos
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace DevIo.Api.Dtos
 {
     public class ProductDto
     {
+        [Key]
+        public Guid Id {  get; set; }    
         public Guid SupplierId { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
