@@ -1,6 +1,6 @@
 ﻿namespace DevIo.Business.Model
 {
-    public class Adress : BaseEntity
+    public class Address : BaseEntity
     {
         public Guid SupplierId { get; set; }
 
@@ -11,5 +11,7 @@
         public string Neighbourhood { get; set; }
         public string Municipality { get; set; }
         public string AdministrativeArea { get; set; }
+
+        public Supplier Supplier { get; set; }
     }
 }
