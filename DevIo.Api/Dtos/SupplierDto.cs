@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using DevIo.Business.Model;
+using System.ComponentModel.DataAnnotations;
 
 namespace DevIo.Api.Dtos
 {
@@ -8,7 +9,7 @@ namespace DevIo.Api.Dtos
         public Guid Id { get; set; }
         public string Name { get; set; }
         public string Document { get; set; }
-        public int SupplierType { get; set; }
+        public SupplierType SupplierType { get; set; }
         public bool IsActive { get; set; }
 
          public AddressDto Addresses { get; set; }
