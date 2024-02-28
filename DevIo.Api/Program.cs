@@ -28,7 +28,26 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+
+    using (var scope = app.Services.CreateScope())
+    {
+        var services = scope.ServiceProvider;
+        var context = services.GetRequiredService<ApiDbContext>();
+        var loggerFactory = services.GetRequiredService<ILoggerFactory>();
+        try
+        {
+            await context.Database.MigrateAsync();
+            //await ApiDbContextSeed.SeedAsync(context);
+        }
+        catch (Exception exception)
+        {
+            var logger = loggerFactory.CreateLogger<Program>();
+            logger.LogError(exception, "An error occured during migration");
+        }
+    }
 }
+
+
 
 app.UseHttpsRedirection();
 
