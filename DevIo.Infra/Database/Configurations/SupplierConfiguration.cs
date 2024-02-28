@@ -19,7 +19,7 @@ namespace DevIo.Infra.Database.Configurations
                 .HasColumnType("varchar(14)");
 
             // 1 : 1 => Supplier : Address
-            builder.HasOne(supplier => supplier.Adress)
+            builder.HasOne(supplier => supplier.Address)
                 .WithOne(adress => adress.Supplier);
 
             // 1 : N => Supplier : Products
