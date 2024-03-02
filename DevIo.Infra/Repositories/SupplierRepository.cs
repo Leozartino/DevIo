@@ -10,24 +10,26 @@ namespace DevIo.Infra.Repositories
 
         public SupplierRepository(ApiDbContext context) : base(context) { }
 
-        public async Task<Supplier> GetSupplierWithAddressAndProductsAsync(Guid id)
+        public async Task<Supplier> GetSupplierWithAddressAsync(Guid id)
         {
             Supplier? supplier = await Db.Suppliers.AsNoTracking()
                                         .Include(x => x.Address)
                                         .FirstOrDefaultAsync();
 
             return ReturnsSupplier(supplier);
+
         }
 
-        public async Task<Supplier> GetSupplierWithAddressAsync(Guid id)
+        public async Task<Supplier> GetSupplierWithAddressAndProductsAsync(Guid id)
         {
+
+
             Supplier? supplier = await Db.Suppliers.AsNoTracking()
-                                        .Include(x => x.Products)
-                                        .Include(x => x.Address)
-                                        .FirstOrDefaultAsync(x => x.Id == id);
+                            .Include(x => x.Products)
+                            .Include(x => x.Address)
+                            .FirstOrDefaultAsync(x => x.Id == id);
 
             return ReturnsSupplier(supplier);
-
         }
 
         private static Supplier ReturnsSupplier(Supplier? supplier)
