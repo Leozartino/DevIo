@@ -1,3 +1,4 @@
+using DevIo.Api.Exceptions;
 using DevIo.Api.Utils.ApplicationSettings;
 using DevIo.Infra.Database;
 using Microsoft.EntityFrameworkCore;
@@ -14,7 +15,11 @@ builder.Services.AddControllers();
 
 builder.Services.AddDbContext<ApiDbContext>(optionsAction: options =>
 {
-    options.UseSqlServer(applicationConfig?.ConnectionStrings.DefaultConnection);
+    if (applicationConfig?.ConnectionStrings?.DefaultConnection is null)
+    {
+        throw new MissingConfigurationException("DefaultConnection");
+    }
+    options.UseSqlServer(applicationConfig.ConnectionStrings.DefaultConnection);
 });
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -22,6 +27,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
+
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
