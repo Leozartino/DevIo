@@ -1,3 +1,4 @@
+using DevIo.Api.Configurations;
 using DevIo.Api.Exceptions;
 using DevIo.Api.Utils.ApplicationSettings;
 using DevIo.Infra.Database;
@@ -12,6 +13,9 @@ var applicationConfig = configuration.Get<ApplicationConfig>();
 // Add services to the container.
 
 builder.Services.AddControllers();
+
+builder.Services.ConfigureRepositoryServices();
+
 
 builder.Services.AddDbContext<ApiDbContext>(optionsAction: options =>
 {
