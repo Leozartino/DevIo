@@ -8,7 +8,7 @@ namespace DevIo.Infra.Database.Configurations
     {
         public void Configure(EntityTypeBuilder<Product> builder)
         {
-            builder.HasKey(product => product.Id);
+            builder.HasKey(property => property.Id).IsClustered();
 
             builder.Property(product => product.Name)
                 .IsRequired()

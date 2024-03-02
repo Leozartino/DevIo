@@ -8,7 +8,7 @@ namespace DevIo.Infra.Database.Configurations
     {
         public void Configure(EntityTypeBuilder<Address> builder)
         {
-            builder.HasKey(adress => adress.Id);
+            builder.HasKey(property => property.Id).IsClustered();
 
             builder.Property(address => address.Street)
                 .IsRequired()
