@@ -13,7 +13,7 @@ var applicationConfig = configuration.Get<ApplicationConfig>();
 // Add services to the container.
 
 builder.Services.AddControllers();
-
+builder.Services.AddScoped<ApiDbContext>();
 builder.Services.ConfigureRepositoryServices();
 
 
