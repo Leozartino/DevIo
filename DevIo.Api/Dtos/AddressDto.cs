@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.Text.Json.Serialization;
 
 namespace DevIo.Api.Dtos
 {
@@ -8,7 +7,7 @@ namespace DevIo.Api.Dtos
         [Key]
         public Guid Id { get; set; }
         //[JsonIgnore]
-        public Guid? SupplierId { get; set; }
+        public Guid SupplierId { get; set; }
         public string Street { get; set; }
         public string Number { get; set; }
         public string Complement { get; set; }

@@ -12,7 +12,7 @@ namespace DevIo.Api.Dtos
         public SupplierType SupplierType { get; set; }
         public bool IsActive { get; set; }
 
-         public AddressDto Address { get; set; }
-         public IEnumerable<ProductDto> Products { get; set; }
+         public AddressDto? Address { get; set; }
+         public IEnumerable<ProductDto>? Products { get; set; }
     }
 }
