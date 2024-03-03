@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DevIo.Infra.Repositories
 {
-    public class SupplierRepository : Repository<Supplier>, ISupplierRepository
+    public class SupplierRepository : BaseRepository<Supplier>, ISupplierRepository
     {
 
         public SupplierRepository(ApiDbContext context) : base(context) { }

@@ -6,12 +6,12 @@ using System.Linq.Expressions;
 
 namespace DevIo.Infra.Repositories
 {
-    public abstract class Repository<TEntity> : IRepository<TEntity> where TEntity : BaseEntity, new()
+    public abstract class BaseRepository<TEntity> : IRepository<TEntity> where TEntity : BaseEntity, new()
     {
         protected readonly ApiDbContext Db;
         protected readonly DbSet<TEntity> DbSet;
 
-        protected Repository(ApiDbContext db)
+        protected BaseRepository(ApiDbContext db)
         {
             Db = db;
             DbSet = db.Set<TEntity>();
