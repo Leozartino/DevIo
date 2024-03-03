@@ -1,5 +1,6 @@
 ﻿using DevIo.Api.Dtos;
 using DevIo.Business.Interfaces.Repositories;
+using DevIo.Business.Model;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DevIo.Api.Controllers
@@ -57,7 +58,7 @@ namespace DevIo.Api.Controllers
                             Image = product.Image,
                             ImageUpload = "S3 URL",
                             IsActive = product.IsActive,
-                            //SupplierName = supplier.Name,
+                            SupplierName = supplier.Name,
                             Value = product.Value,
                             CreatedAt = product.CreatedAt,
                         };
@@ -66,6 +67,26 @@ namespace DevIo.Api.Controllers
             });
 
             return Ok(suppliersDto);
+        }
+
+        [HttpPost]
+        [ProducesResponseType(typeof(SupplierDto), StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        public async Task<ActionResult<SupplierDto>> CreateSupplier([FromBody] SupplierDto supplierDto)
+        {
+            Supplier supplier = new Supplier
+            {
+                Name = supplierDto.Name,
+                Document = supplierDto.Document,
+                IsActive = supplierDto.IsActive,
+                SupplierType = supplierDto.SupplierType,
+                
+            };
+
+            await _supplierRepository.Add(supplier);
+
+            return CreatedAtAction("GetSuppliers", supplierDto);
+     
         }
     }
 }
