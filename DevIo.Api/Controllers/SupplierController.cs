@@ -1,4 +1,6 @@
 ﻿using DevIo.Api.Dtos;
+using DevIo.Api.Dtos.Request;
+using DevIo.Business.Interfaces;
 using DevIo.Business.Interfaces.Repositories;
 using DevIo.Business.Model;
 using Microsoft.AspNetCore.Mvc;
@@ -9,10 +11,14 @@ namespace DevIo.Api.Controllers
     {
 
         private readonly ISupplierRepository _supplierRepository;
+        private readonly IAdapter<SupplierRequestDto, Supplier> _adapter;
 
-        public SupplierController(ISupplierRepository supplierRepository)
+
+        public SupplierController(ISupplierRepository supplierRepository, 
+            IAdapter<SupplierRequestDto, Supplier> adapter)
         {
             _supplierRepository = supplierRepository;
+            _adapter = adapter;
         }
 
         [HttpGet]
@@ -70,22 +76,16 @@ namespace DevIo.Api.Controllers
         }
 
         [HttpPost]
-        [ProducesResponseType(typeof(SupplierDto), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(Supplier), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-        public async Task<ActionResult<SupplierDto>> CreateSupplier([FromBody] SupplierDto supplierDto)
+        public async Task<ActionResult<Supplier>> CreateSupplier([FromBody] SupplierRequestDto request)
         {
-            Supplier supplier = new Supplier
-            {
-                Name = supplierDto.Name,
-                Document = supplierDto.Document,
-                IsActive = supplierDto.IsActive,
-                SupplierType = supplierDto.SupplierType,
-                
-            };
+
+            Supplier supplier = _adapter.ConvertToDestinationObject(request);
 
             await _supplierRepository.Add(supplier);
 
-            return CreatedAtAction("GetSuppliers", supplierDto);
+            return CreatedAtAction("GetSuppliers", supplier);
      
         }
     }
