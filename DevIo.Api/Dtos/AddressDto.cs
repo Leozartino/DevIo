@@ -6,7 +6,6 @@ namespace DevIo.Api.Dtos
     {
         [Key]
         public Guid Id { get; set; }
-        //[JsonIgnore]
         public Guid SupplierId { get; set; }
         public string Street { get; set; }
         public string Number { get; set; }

@@ -1,6 +1,10 @@
+using DevIo.Api.Adapters;
 using DevIo.Api.Configurations;
+using DevIo.Api.Dtos.Request;
 using DevIo.Api.Exceptions;
 using DevIo.Api.Utils.ApplicationSettings;
+using DevIo.Business.Interfaces;
+using DevIo.Business.Model;
 using DevIo.Infra.Database;
 using Microsoft.EntityFrameworkCore;
 
@@ -13,6 +17,8 @@ var applicationConfig = configuration.Get<ApplicationConfig>();
 // Add services to the container.
 
 builder.Services.AddControllers();
+builder.Services.AddScoped<IAdapter<AddressRequestDto, Address>, AddressAdapter>();
+builder.Services.AddScoped<IAdapter<SupplierRequestDto, Supplier>, SupplierAdapter>();
 builder.Services.AddScoped<ApiDbContext>();
 builder.Services.ConfigureRepositoryServices();
 
@@ -56,8 +62,6 @@ if (app.Environment.IsDevelopment())
         }
     }
 }
-
-
 
 app.UseHttpsRedirection();
 
