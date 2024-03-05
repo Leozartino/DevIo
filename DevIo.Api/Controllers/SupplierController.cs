@@ -78,6 +78,7 @@ namespace DevIo.Api.Controllers
         [HttpPost]
         [ProducesResponseType(typeof(Supplier), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult<Supplier>> CreateSupplier([FromBody] SupplierRequestDto request)
         {
 
