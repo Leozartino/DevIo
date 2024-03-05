@@ -17,7 +17,6 @@ var applicationConfig = configuration.Get<ApplicationConfig>();
 // Add services to the container.
 
 builder.Services.AddControllers();
-builder.Services.AddScoped<IAdapter<AddressRequestDto, Address>, AddressAdapter>();
 builder.Services.AddScoped<IAdapter<SupplierRequestDto, Supplier>, SupplierAdapter>();
 builder.Services.AddScoped<ApiDbContext>();
 builder.Services.ConfigureRepositoryServices();

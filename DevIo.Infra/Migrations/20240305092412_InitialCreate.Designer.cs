@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DevIo.Infra.Migrations
 {
     [DbContext(typeof(ApiDbContext))]
-    [Migration("20240228191337_InitialCreate")]
+    [Migration("20240305092412_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -134,12 +134,10 @@ namespace DevIo.Infra.Migrations
 
             modelBuilder.Entity("DevIo.Business.Model.Address", b =>
                 {
-                    b.HasOne("DevIo.Business.Model.Supplier", "Supplier")
-                        .WithOne("Adress")
+                    b.HasOne("DevIo.Business.Model.Supplier", null)
+                        .WithOne("Address")
                         .HasForeignKey("DevIo.Business.Model.Address", "SupplierId")
                         .IsRequired();
-
-                    b.Navigation("Supplier");
                 });
 
             modelBuilder.Entity("DevIo.Business.Model.Product", b =>
@@ -154,7 +152,7 @@ namespace DevIo.Infra.Migrations
 
             modelBuilder.Entity("DevIo.Business.Model.Supplier", b =>
                 {
-                    b.Navigation("Adress")
+                    b.Navigation("Address")
                         .IsRequired();
 
                     b.Navigation("Products");

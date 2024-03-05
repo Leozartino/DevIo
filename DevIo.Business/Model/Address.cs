@@ -10,7 +10,5 @@
         public string Neighbourhood { get; set; }
         public string Municipality { get; set; }
         public string AdministrativeArea { get; set; }
-
-        public Supplier Supplier { get; set; }
     }
 }

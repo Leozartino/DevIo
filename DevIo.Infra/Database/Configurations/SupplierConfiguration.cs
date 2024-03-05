@@ -20,7 +20,9 @@ namespace DevIo.Infra.Database.Configurations
 
             // 1 : 1 => Supplier : Address
             builder.HasOne(supplier => supplier.Address)
-                .WithOne(adress => adress.Supplier);
+                .WithOne()
+                .HasForeignKey<Address>(address => address.SupplierId)
+                .IsRequired();
 
             // 1 : N => Supplier : Products
             builder.HasMany(supplier => supplier.Products)
