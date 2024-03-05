@@ -32,7 +32,7 @@ namespace DevIo.Api.Adapters
                 Neighbourhood = source.Neighbourhood,
                 Municipality = source.Municipality,
                 AdministrativeArea = source.AdministrativeArea,
-                Complement = source.Complement
+                Complement = source.Complement            
             };
         }
     }
