@@ -2,6 +2,7 @@
 using DevIo.Api.Dtos.Request;
 using DevIo.Business.Interfaces;
 using DevIo.Business.Interfaces.Repositories;
+using DevIo.Business.Interfaces.Services;
 using DevIo.Business.Model;
 using Microsoft.AspNetCore.Mvc;
 
@@ -12,13 +13,18 @@ namespace DevIo.Api.Controllers
 
         private readonly ISupplierRepository _supplierRepository;
         private readonly IAdapter<SupplierRequestDto, Supplier> _adapter;
+        private readonly ICreateService<SupplierRequestDto, Supplier> _createService;
 
-
-        public SupplierController(ISupplierRepository supplierRepository, 
-            IAdapter<SupplierRequestDto, Supplier> adapter)
+        public SupplierController
+            (
+            ISupplierRepository supplierRepository, 
+            IAdapter<SupplierRequestDto, Supplier> adapter, 
+            ICreateService<SupplierRequestDto, Supplier> createService
+            )
         {
             _supplierRepository = supplierRepository;
             _adapter = adapter;
+            _createService = createService;
         }
 
         [HttpGet]
@@ -81,10 +87,7 @@ namespace DevIo.Api.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<ActionResult<Supplier>> CreateSupplier([FromBody] SupplierRequestDto request)
         {
-
-            Supplier supplier = _adapter.ConvertToDestinationObject(request);
-
-            await _supplierRepository.Add(supplier);
+            var supplier = await _createService.CreateAsync(request);
 
             return CreatedAtAction("GetSuppliers", supplier);
      
