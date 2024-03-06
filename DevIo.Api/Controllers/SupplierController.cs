@@ -1,7 +1,4 @@
-﻿using DevIo.Api.Dtos;
-using DevIo.Api.Dtos.Request;
-using DevIo.Business.Interfaces;
-using DevIo.Business.Interfaces.Repositories;
+﻿using DevIo.Api.Dtos.Request;
 using DevIo.Business.Interfaces.Services;
 using DevIo.Business.Model;
 using Microsoft.AspNetCore.Mvc;
@@ -10,75 +7,14 @@ namespace DevIo.Api.Controllers
 {
     public class SupplierController : MainController
     {
-
-        private readonly ISupplierRepository _supplierRepository;
-        private readonly IAdapter<SupplierRequestDto, Supplier> _adapter;
         private readonly ICreateService<SupplierRequestDto, Supplier> _createService;
 
         public SupplierController
             (
-            ISupplierRepository supplierRepository, 
-            IAdapter<SupplierRequestDto, Supplier> adapter, 
             ICreateService<SupplierRequestDto, Supplier> createService
             )
         {
-            _supplierRepository = supplierRepository;
-            _adapter = adapter;
             _createService = createService;
-        }
-
-        [HttpGet]
-        [ProducesResponseType(typeof(IEnumerable<SupplierDto>), StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-        public async Task<ActionResult<IEnumerable<SupplierDto>>> GetSuppliers()
-        {
-            var suppliers = await _supplierRepository.GetAll();
-
-            if (suppliers.Count == 0)
-            { 
-                return Ok(suppliers);
-            }
-
-            var suppliersDto = suppliers.Select(supplier =>
-            {
-                return new SupplierDto
-                {
-                    Id = supplier.Id,
-                    Name = supplier.Name,
-                    Document = supplier.Document,
-                    SupplierType = supplier.SupplierType,
-                    IsActive = supplier.IsActive,
-                    Address = new AddressDto
-                    {
-                        Id = supplier.Address.Id,
-                        Street = supplier.Address.Street,
-                        Number = supplier.Address.Number,
-                        Complement = supplier.Address.Complement,
-                        PostalCode = supplier.Address.PostalCode,
-                        Neighbourhood = supplier.Address.Neighbourhood,
-                        Municipality = supplier.Address.Municipality,
-                        AdministrativeArea = supplier.Address.AdministrativeArea,
-                    },
-
-                    Products = supplier.Products.Select(product =>
-                    {
-                        return new ProductDto
-                        {
-                            Id = product.Id,
-                            Name = product.Name,
-                            Description = product.Description,
-                            Image = product.Image,
-                            ImageUpload = "S3 URL",
-                            IsActive = product.IsActive,
-                            SupplierName = supplier.Name,
-                            Value = product.Value,
-                            CreatedAt = product.CreatedAt,
-                        };
-                    }),
-                };
-            });
-
-            return Ok(suppliersDto);
         }
 
         [HttpPost]
@@ -89,8 +25,8 @@ namespace DevIo.Api.Controllers
         {
             var supplier = await _createService.CreateAsync(request);
 
-            return CreatedAtAction("GetSuppliers", supplier);
-     
+            return CreatedAtAction("GetSupplier", supplier);
+
         }
     }
 }

@@ -4,8 +4,10 @@ using DevIo.Api.Dtos.Request;
 using DevIo.Api.Exceptions;
 using DevIo.Api.Utils.ApplicationSettings;
 using DevIo.Business.Interfaces;
+using DevIo.Business.Interfaces.Services;
 using DevIo.Business.Model;
 using DevIo.Infra.Database;
+using DevIo.Services.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -18,6 +20,7 @@ var applicationConfig = configuration.Get<ApplicationConfig>();
 
 builder.Services.AddControllers();
 builder.Services.AddScoped<IAdapter<SupplierRequestDto, Supplier>, SupplierAdapter>();
+builder.Services.AddScoped<ICreateService<SupplierRequestDto, Supplier>, CreateSupplierService>();
 builder.Services.AddScoped<ApiDbContext>();
 builder.Services.ConfigureRepositoryServices();
 
