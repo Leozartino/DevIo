@@ -6,18 +6,18 @@ namespace DevIo.Api.Adapters
 {
     public class SupplierAdapter : IAdapter<SupplierRequestDto, Supplier>
     {
-        private Supplier supplier = new Supplier();
+        private readonly Supplier _supplier = new();
 
         public Supplier ConvertToDestinationObject(SupplierRequestDto source)
         {
 
-            supplier.Name = source.Name;
-            supplier.Document = source.Document;
-            supplier.IsActive = source.IsActive;
-            supplier.SupplierType = source.SupplierType;
-            supplier.Address = ConvertToDestinationObject(source.Address);
+            _supplier.Name = source.Name;
+            _supplier.Document = source.Document;
+            _supplier.IsActive = source.IsActive;
+            _supplier.SupplierType = source.SupplierType;
+            _supplier.Address = ConvertToDestinationObject(source.Address);
             
-            return supplier;
+            return _supplier;
 
         }
 
@@ -26,7 +26,7 @@ namespace DevIo.Api.Adapters
             return new Address
             {
                 Street = source.Street,
-                SupplierId = supplier.Id,
+                SupplierId = _supplier.Id,
                 PostalCode = source.PostalCode,
                 Number = source.Number,
                 Neighbourhood = source.Neighbourhood,
