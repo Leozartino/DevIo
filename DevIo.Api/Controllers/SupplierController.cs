@@ -7,21 +7,43 @@ namespace DevIo.Api.Controllers
 {
     public class SupplierController : MainController
     {
-        private readonly ICreateService<SupplierRequestDto, Supplier> _createService;
+        private readonly ICreateService<SupplierCreateDto, Supplier> _createService;
+        private readonly IGetSupplierByIdService<Supplier> _getSupplierByIdService;
 
         public SupplierController
             (
-            ICreateService<SupplierRequestDto, Supplier> createService
+            ICreateService<SupplierCreateDto, Supplier> createService,
+            IGetSupplierByIdService<Supplier> getSupplierByIdService
             )
         {
             _createService = createService;
+            _getSupplierByIdService = getSupplierByIdService;
         }
+
+        [HttpGet("{id}")]
+        [ProducesResponseType(typeof(Supplier), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<ActionResult<Supplier>> GetSupplier([FromRoute] Guid id)
+        {
+            var supplier = await _getSupplierByIdService.GetSupplierById(id);
+
+            if (supplier is null)
+            {
+                return NotFound();
+            }
+
+            
+
+            return Ok(supplier);
+        }
+
 
         [HttpPost]
         [ProducesResponseType(typeof(Supplier), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult<Supplier>> CreateSupplier([FromBody] SupplierRequestDto request)
+        public async Task<ActionResult<Supplier>> CreateSupplier([FromBody] SupplierCreateDto request)
         {
             var supplier = await _createService.CreateAsync(request);
 
