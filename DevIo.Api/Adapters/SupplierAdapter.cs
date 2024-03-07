@@ -4,11 +4,11 @@ using DevIo.Business.Model;
 
 namespace DevIo.Api.Adapters
 {
-    public class SupplierAdapter : IAdapter<SupplierRequestDto, Supplier>
+    public class SupplierAdapter : IAdapter<SupplierCreateDto, Supplier>
     {
         private readonly Supplier _supplier = new();
 
-        public Supplier ConvertToDestinationObject(SupplierRequestDto source)
+        public Supplier ConvertToDestinationObject(SupplierCreateDto source)
         {
 
             _supplier.Name = source.Name;
@@ -21,7 +21,7 @@ namespace DevIo.Api.Adapters
 
         }
 
-        private Address ConvertToDestinationObject(AddressRequestDto source)
+        private Address ConvertToDestinationObject(AddressCreateDto source)
         {
             return new Address
             {
