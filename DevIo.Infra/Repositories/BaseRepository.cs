@@ -26,11 +26,6 @@ namespace DevIo.Infra.Repositories
         {
             TEntity? result = await DbSet.FindAsync(id);
 
-            if(result is null)
-            {
-                return new TEntity();
-            }
-
             return result;
         }
 
