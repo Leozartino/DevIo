@@ -2,12 +2,15 @@ using DevIo.Api.Adapters;
 using DevIo.Api.Configurations;
 using DevIo.Api.Dtos.Request;
 using DevIo.Api.Exceptions;
+using DevIo.Api.Services;
 using DevIo.Api.Utils.ApplicationSettings;
+using DevIo.Api.Validators;
 using DevIo.Business.Interfaces;
 using DevIo.Business.Interfaces.Services;
 using DevIo.Business.Model;
 using DevIo.Infra.Database;
 using DevIo.Services.Services;
+using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -19,8 +22,10 @@ var applicationConfig = configuration.Get<ApplicationConfig>();
 // Add services to the container.
 
 builder.Services.AddControllers();
-builder.Services.AddScoped<IAdapter<SupplierRequestDto, Supplier>, SupplierAdapter>();
-builder.Services.AddScoped<ICreateService<SupplierRequestDto, Supplier>, CreateSupplierService>();
+builder.Services.AddScoped<IAdapter<SupplierCreateDto, Supplier>, SupplierAdapter>();
+builder.Services.AddTransient<IValidator<SupplierCreateDto>, SupplierCreateDtoValidator>();
+builder.Services.AddScoped<ICreateService<SupplierCreateDto, Supplier>, CreateSupplierService>();
+builder.Services.AddScoped<IGetSupplierByIdService<Supplier>, GetSupplierByIdService>();
 builder.Services.AddScoped<ApiDbContext>();
 builder.Services.ConfigureRepositoryServices();
 
