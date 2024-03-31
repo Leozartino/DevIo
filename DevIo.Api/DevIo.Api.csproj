@@ -20,8 +20,4 @@
     <ProjectReference Include="..\DevIo.Infra\DevIo.Infra.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Dtos\Response\" />
-  </ItemGroup>
-
 </Project>

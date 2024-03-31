@@ -8,6 +8,6 @@ namespace DevIo.Api.Dtos.Request
         public string Document { get; set; }
         public SupplierType SupplierType { get; set; }
         public bool IsActive { get; set; }
-        public AddressCreateDto Address { get; set; }
+        public AddressDto Address { get; set; }
     }
 }

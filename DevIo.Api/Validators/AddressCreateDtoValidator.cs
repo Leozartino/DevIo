@@ -3,7 +3,7 @@ using FluentValidation;
 
 namespace DevIo.Api.Validators
 {
-    public class AddressCreateDtoValidator : AbstractValidator<AddressCreateDto>
+    public class AddressCreateDtoValidator : AbstractValidator<AddressDto>
     {
         public AddressCreateDtoValidator()
         {

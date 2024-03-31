@@ -5,7 +5,7 @@ using DevIo.Business.Interfaces.Services;
 using DevIo.Business.Model;
 using FluentValidation;
 
-namespace DevIo.Services.Services
+namespace DevIo.Api.Services
 {
     public class CreateSupplierService : ICreateService<SupplierCreateDto, Supplier>
     {

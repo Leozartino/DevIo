@@ -4,7 +4,7 @@ using DevIo.Business.Model;
 
 namespace DevIo.Api.Adapters
 {
-    public class SupplierAdapter : IAdapter<SupplierCreateDto, Supplier>
+    public class CreateSupplierAdapter : IAdapter<SupplierCreateDto, Supplier>
     {
         private readonly Supplier _supplier = new();
 
@@ -21,7 +21,7 @@ namespace DevIo.Api.Adapters
 
         }
 
-        private Address ConvertToDestinationObject(AddressCreateDto source)
+        private Address ConvertToDestinationObject(AddressDto source)
         {
             return new Address
             {
@@ -32,7 +32,7 @@ namespace DevIo.Api.Adapters
                 Neighbourhood = source.Neighbourhood,
                 Municipality = source.Municipality,
                 AdministrativeArea = source.AdministrativeArea,
-                Complement = source.Complement            
+                Complement = source.Complement       
             };
         }
     }

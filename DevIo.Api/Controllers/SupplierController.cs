@@ -1,4 +1,5 @@
 ﻿using DevIo.Api.Dtos.Request;
+using DevIo.Api.Dtos.Response;
 using DevIo.Business.Interfaces.Services;
 using DevIo.Business.Model;
 using Microsoft.AspNetCore.Mvc;
@@ -24,7 +25,7 @@ namespace DevIo.Api.Controllers
         [ProducesResponseType(typeof(Supplier), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult<Supplier>> GetSupplier([FromRoute] Guid id)
+        public async Task<ActionResult<SupplierResponseDto>> GetSupplier([FromRoute] Guid id)
         {
             var supplier = await _getSupplierByIdService.GetSupplierById(id);
 
@@ -32,18 +33,15 @@ namespace DevIo.Api.Controllers
             {
                 return NotFound();
             }
-
             
-
             return Ok(supplier);
         }
-
-
+        
         [HttpPost]
         [ProducesResponseType(typeof(Supplier), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult<Supplier>> CreateSupplier([FromBody] SupplierCreateDto request)
+        public async Task<ActionResult<SupplierResponseDto>> CreateSupplier([FromBody] SupplierCreateDto request)
         {
             var supplier = await _createService.CreateAsync(request);
 

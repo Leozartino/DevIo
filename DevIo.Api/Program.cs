@@ -9,7 +9,6 @@ using DevIo.Business.Interfaces;
 using DevIo.Business.Interfaces.Services;
 using DevIo.Business.Model;
 using DevIo.Infra.Database;
-using DevIo.Services.Services;
 using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 
@@ -22,7 +21,7 @@ var applicationConfig = configuration.Get<ApplicationConfig>();
 // Add services to the container.
 
 builder.Services.AddControllers();
-builder.Services.AddScoped<IAdapter<SupplierCreateDto, Supplier>, SupplierAdapter>();
+builder.Services.AddScoped<IAdapter<SupplierCreateDto, Supplier>, CreateSupplierAdapter>();
 builder.Services.AddTransient<IValidator<SupplierCreateDto>, SupplierCreateDtoValidator>();
 builder.Services.AddScoped<ICreateService<SupplierCreateDto, Supplier>, CreateSupplierService>();
 builder.Services.AddScoped<IGetSupplierByIdService<Supplier>, GetSupplierByIdService>();
