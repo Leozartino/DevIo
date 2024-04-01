@@ -1,6 +1,8 @@
 using DevIo.Api.Adapters;
 using DevIo.Api.Configurations;
+using DevIo.Api.Dtos;
 using DevIo.Api.Dtos.Request;
+using DevIo.Api.Dtos.Response;
 using DevIo.Api.Exceptions;
 using DevIo.Api.Services;
 using DevIo.Api.Utils.ApplicationSettings;
@@ -22,6 +24,8 @@ var applicationConfig = configuration.Get<ApplicationConfig>();
 
 builder.Services.AddControllers();
 builder.Services.AddScoped<IAdapter<SupplierCreateDto, Supplier>, CreateSupplierAdapter>();
+builder.Services.AddScoped<IAdapter<Supplier, SupplierResponseDto>, GetSupplierAdapter>();
+builder.Services.AddScoped<IAdapter<Product, ProductDto>, GetProductAdapter>();
 builder.Services.AddTransient<IValidator<SupplierCreateDto>, SupplierCreateDtoValidator>();
 builder.Services.AddScoped<ICreateService<SupplierCreateDto, Supplier>, CreateSupplierService>();
 builder.Services.AddScoped<IGetSupplierByIdService<Supplier>, GetSupplierByIdService>();

@@ -1,4 +1,5 @@
-﻿using DevIo.Api.Dtos.Request;
+﻿using DevIo.Api.Dtos;
+using DevIo.Api.Dtos.Request;
 using DevIo.Api.Dtos.Response;
 using DevIo.Business.Interfaces;
 using DevIo.Business.Model;
@@ -8,6 +9,13 @@ namespace DevIo.Api.Adapters;
 public class GetSupplierAdapter: IAdapter<Supplier, SupplierResponseDto>
 {
     private readonly SupplierResponseDto _supplierResponseDto = new();
+    private readonly IAdapter<Product, ProductDto> _productAdapter;
+
+    public GetSupplierAdapter(IAdapter<Product, ProductDto> productAdapter)
+    {
+        _productAdapter = productAdapter;
+    }
+
     public SupplierResponseDto ConvertToDestinationObject(Supplier source)
     {
         _supplierResponseDto.Name = source.Name;
@@ -15,8 +23,7 @@ public class GetSupplierAdapter: IAdapter<Supplier, SupplierResponseDto>
         _supplierResponseDto.SupplierType = source.SupplierType;
         _supplierResponseDto.IsActive = source.IsActive;
         _supplierResponseDto.Address = ConvertToDestinationObject(source.Address);
-        
-        //TODO MAPPING Product to ProductDto
+        _supplierResponseDto.Products = source.Products.Select(_productAdapter.ConvertToDestinationObject);
         
         return _supplierResponseDto;
     }

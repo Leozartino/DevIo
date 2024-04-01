@@ -21,6 +21,13 @@ namespace DevIo.Api.Controllers
             _getSupplierByIdService = getSupplierByIdService;
         }
 
+        //[HttpGet]
+        //public async Task<ActionResult<SupplierResponseDto>> GetAllSuppliers()
+        //{
+        //    return _
+        //}
+
+
         [HttpGet("{id}")]
         [ProducesResponseType(typeof(Supplier), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
